@@ -63,12 +63,14 @@ export const authController = {
       name: user.name,
     });
 
+    const isProd = process.env.NODE_ENV === "production";
+
     reply.setCookie("token", token, {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: isProd ? "none" : "lax",
+      secure: isProd,
       path: "/",
       maxAge: 60 * 60 * 24 * 7,
-      // secure: true, // pe HTTPS; pe localhost lasă-l comentat
     });
 
     // IMPORTANT: frontend-ul vrea { user: {...} }
