@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+:root {
+  --bg: #0b0e12;
+  --text: #e6edf3;
+  --muted: #9aa4b2;
+  --panel: rgba(255, 255, 255, 0.06);
+  --panel-soft: rgba(255, 255, 255, 0.04);
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --panel-border-soft: rgba(255, 255, 255, 0.08);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+body {
+  font-family: "Work Sans", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1,
+h2 {
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.panel-soft {
+  background: var(--panel-soft);
+  border: 1px solid var(--panel-border-soft);
+  border-radius: 18px;
+}
+
+.icon {
+  height: 16px;
+  width: 16px;
+}
+
+.task-card {
+  transition: transform 200ms ease, border-color 200ms ease, background-color 200ms ease;
+}
+
+.task-card.task-done {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.task-badge {
+  transition: transform 200ms ease, background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.task-badge.badge-done {
+  animation: pop 220ms ease;
+}
+
+.chip {
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+}
+
+.chip-active {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: rgba(16, 185, 129, 0.45);
+  color: #d1fae5;
+  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.15), 0 10px 24px rgba(16, 185, 129, 0.18);
+}
+
+.chip-muted {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.float-slow {
+  animation: float 12s ease-in-out infinite;
+}
+
+.float-slower {
+  animation: float 16s ease-in-out infinite;
+}
+
+.fade-up {
+  animation: fadeUp 500ms ease both;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(18px);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.96);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
