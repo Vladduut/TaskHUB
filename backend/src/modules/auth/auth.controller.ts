@@ -63,12 +63,15 @@ export const authController = {
       name: user.name,
     });
 
+    const forwardedProto = req.headers["x-forwarded-proto"];
+    const proto = Array.isArray(forwardedProto) ? forwardedProto[0] : forwardedProto;
     const isProd = process.env.NODE_ENV === "production";
+    const isHttps = proto === "https" || isProd;
 
     reply.setCookie("token", token, {
       httpOnly: true,
-      sameSite: isProd ? "none" : "lax",
-      secure: isProd,
+      sameSite: isHttps ? "none" : "lax",
+      secure: isHttps,
       path: "/",
       maxAge: 60 * 60 * 24 * 7,
     });
