@@ -224,20 +224,6 @@ export default function App() {
   };
 
   // ---------- TASKS ----------
-  const loadTasks = async (projectId: string) => {
-    setLoading(true);
-    try {
-      const res = await api.get<any[]>("/tasks", { params: { projectId } });
-      const normalized = (res.data ?? []).map(normalizeTask);
-      setTasksByProject((prev) => ({ ...prev, [projectId]: normalized }));
-    } catch (err) {
-      console.error(err);
-      showToast("Nu pot încărca task-urile ❌", "bad");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const createTask = async (projectId: string) => {
     const title = (taskInputs[projectId] ?? "").trim();
     if (!title) return showToast("Scrie un titlu de task 🙂", "bad");
