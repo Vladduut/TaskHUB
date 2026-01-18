@@ -12,9 +12,14 @@ import { taskRoutes } from "./modules/task/task.routes.js";
 const app = Fastify({ logger: true });
 
 async function start() {
-  // CORS (frontend pe 5173)
+  // CORS (local + productie)
+  const corsOrigins = (process.env.CORS_ORIGIN || "http://localhost:5173")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+
   await app.register(cors, {
-    origin: "http://localhost:5173",
+    origin: corsOrigins,
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   });
